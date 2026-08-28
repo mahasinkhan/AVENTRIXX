@@ -2,10 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-<<<<<<< HEAD
 import Image from "next/image";
-=======
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
 import {
   AnimatePresence,
   motion,
@@ -69,7 +66,6 @@ export default function SiteNav() {
             : "mt-5 border border-transparent py-3"
         )}
       >
-<<<<<<< HEAD
         <Link href="/" className="group flex items-center shrink-0">
   <Image
     src="/img/Aventrix logo.png"
@@ -77,20 +73,9 @@ export default function SiteNav() {
     width={220}
     height={70}
     priority
-    className="h-14 w-auto object-contain"
+    className="h-20 w-auto object-contain"
   />
 </Link>
-=======
-        <Link href="/" className="group flex items-center gap-2.5">
-          <span className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-[11px] bg-ink text-ground">
-            <span className="absolute inset-0 bg-gradient-to-br from-iris via-iris-deep to-ink opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <span className="relative font-display text-sm font-bold">L</span>
-          </span>
-          <span className="font-display text-lg font-semibold tracking-tight">
-            Lumina
-          </span>
-        </Link>
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
 
         <nav
           className="hidden items-center gap-1 md:flex"
@@ -171,9 +156,4 @@ export default function SiteNav() {
       </AnimatePresence>
     </motion.header>
   );
-<<<<<<< HEAD
 }
-=======
-}
-
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
