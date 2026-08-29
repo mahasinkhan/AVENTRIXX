@@ -1,0 +1,194 @@
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowUpRight } from "lucide-react";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+const featured = {
+  name: "Financial services",
+  copy: "Ledgers, reconciliation and reporting that survive audit and month-end.",
+  src: "/img/sector-finance.jpg",
+};
+
+const stacked = [
+  {
+    name: "Healthcare",
+    copy: "Clinical tooling with traceability built into every answer.",
+    src: "/img/sector-health.jpg",
+  },
+  {
+    name: "Industrial and logistics",
+    copy: "Telemetry, routing and planning at fleet scale.",
+    src: "/img/sector-logistics.jpg",
+  },
+];
+
+const more = [
+  { label: "Public sector", headline: "Citizen services and case systems built to survive scrutiny." },
+  { label: "Retail and commerce", headline: "Storefronts and inventory that hold up on peak days." },
+  { label: "Energy and utilities", headline: "Grid, metering and field data at national scale." },
+  { label: "Telecom and media", headline: "Billing, provisioning and streaming under real load." },
+];
+
+export default function Sectors() {
+  const root = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.from(".sec-head-item", {
+        y: 26,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.08,
+        ease: "expo.out",
+        scrollTrigger: { trigger: root.current, start: "top 78%" },
+      });
+
+      gsap.utils.toArray<HTMLElement>(".sec-media").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { yPercent: -8, scale: 1.14 },
+          {
+            yPercent: 8,
+            scale: 1.14,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.7,
+            },
+          }
+        );
+      });
+
+      gsap.set(".sec-card", { y: 34, opacity: 0 });
+      ScrollTrigger.batch(".sec-card", {
+        start: "top 90%",
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            y: 0,
+            opacity: 1,
+            duration: 0.95,
+            stagger: 0.09,
+            ease: "expo.out",
+            overwrite: true,
+          }),
+      });
+    },
+    { scope: root }
+  );
+
+  return (
+    <section ref={root} id="sectors" className="section-y relative scroll-mt-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="sec-head-item type-eyebrow">Sectors</p>
+            <h2 className="sec-head-item mt-6 max-w-2xl type-h2">
+              Regulated, high-volume, <span className="inkflow">unforgiving.</span>
+            </h2>
+          </div>
+          <p className="sec-head-item max-w-sm type-body">
+            The work we do best is where correctness is not negotiable and the
+            data does not stop arriving.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-4 lg:grid-cols-[1.1fr_2.2fr_1.5fr] lg:items-stretch">
+          {/* Featured — center */}
+          <Link
+            href="#contact"
+            className="sec-card group relative order-1 flex min-h-[26rem] flex-col justify-end overflow-hidden rounded-card border border-line p-8 transition-[transform,box-shadow] duration-500 ease-expo hover:-translate-y-1.5 hover:shadow-lift lg:order-none lg:col-start-2 lg:row-start-1 lg:min-h-[36rem]"
+          >
+            <div className="img-tint img-grid absolute inset-0 overflow-hidden">
+              <Image
+                src={featured.src}
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="sec-media object-cover"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-2/3 bg-gradient-to-t from-ink/90 via-ink/50 to-transparent" />
+            <div className="relative z-[3]">
+              <span className="type-eyebrow text-ground/80">Featured sector</span>
+              <h3 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ground lg:text-4xl">
+                {featured.name}
+              </h3>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-ground/80">
+                {featured.copy}
+              </p>
+              <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-ground">
+                Discuss a project
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-500 ease-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </div>
+          </Link>
+
+          {/* Stacked pair — left */}
+          <div className="order-2 flex flex-col gap-4 lg:order-none lg:col-start-1 lg:row-start-1">
+            {stacked.map((s) => (
+              <Link
+                href="#contact"
+                key={s.name}
+                className="sec-card group relative flex min-h-[15rem] flex-1 flex-col justify-end overflow-hidden rounded-card border border-line p-6 transition-[transform,box-shadow] duration-500 ease-expo hover:-translate-y-1.5 hover:shadow-lift"
+              >
+                <div className="img-tint img-grid absolute inset-0 overflow-hidden">
+                  <Image
+                    src={s.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 25vw"
+                    className="sec-media object-cover"
+                  />
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-2/3 bg-gradient-to-t from-ink/90 via-ink/45 to-transparent" />
+                <div className="relative z-[3]">
+                  <h3 className="font-display text-xl font-semibold tracking-tight text-ground">
+                    {s.name}
+                  </h3>
+                  <p className="mt-2 max-w-xs text-sm leading-relaxed text-ground/75">
+                    {s.copy}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-ground">
+                    Discuss a project
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-500 ease-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* List — right */}
+          <div className="order-3 flex flex-col gap-3 lg:order-none lg:col-start-3 lg:row-start-1">
+            {more.map((m) => (
+              <Link
+                href="#contact"
+                key={m.label}
+                className="sec-card group flex flex-1 flex-col justify-between rounded-card border border-line bg-surface p-5 transition-[transform,box-shadow,border-color] duration-500 ease-expo hover:-translate-y-1 hover:border-line-strong hover:shadow-lift"
+              >
+                <div>
+                  <p className="type-eyebrow text-muted">{m.label}</p>
+                  <p className="mt-3 font-display text-base font-semibold leading-snug tracking-tight text-ink">
+                    {m.headline}
+                  </p>
+                </div>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-iris">
+                  Discuss a project
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-500 ease-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
