@@ -71,12 +71,11 @@ export default function SiteNav() {
       >
         <Link href="/" className="group flex items-center shrink-0">
   <Image
-    src="/img/Aventrix logo.png"
+    src="/img/aventrixx-logo.png"
     alt="Aventrixx"
-    width={220}
-    height={70}
-    priority
-    className="h-20 w-auto object-contain"
+    width={140}
+    height={44}
+    className="h-10 w-auto object-contain"
   />
 </Link>
 
