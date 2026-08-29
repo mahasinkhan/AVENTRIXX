@@ -37,7 +37,7 @@ export default function SiteFooter() {
               delivered by senior engineers, owned outright by you.
             </p>
             <Link
-              href="#contact"
+              href="/#contact"
               className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-300 hover:text-iris"
             >
               hello@aventrixx.dev

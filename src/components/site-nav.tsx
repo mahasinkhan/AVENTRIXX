@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   AnimatePresence,
   motion,
@@ -13,10 +14,10 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { label: "Services", href: "#services" },
-  { label: "Platform", href: "#platform" },
-  { label: "Work", href: "#work" },
-  { label: "Company", href: "#company" },
+  { label: "Services", href: "/#services" },
+  { label: "Platform", href: "/#platform" },
+  { label: "Work", href: "/#work" },
+  { label: "Company", href: "/#company" },
 ];
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -27,20 +28,22 @@ export default function SiteNav() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [active, setActive] = useState<string | null>(null);
   const { scrollY } = useScroll();
+  const pathname = usePathname();
+  const onProjects = pathname === "/projects";
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 24));
 
   useEffect(() => {
     const sections = links
-      .map((l) => document.querySelector(l.href))
-      .filter((el): el is Element => Boolean(el));
+      .map((l) => document.getElementById(l.href.split("#")[1]))
+      .filter((el): el is HTMLElement => Boolean(el));
 
     if (!sections.length) return;
 
     const io = new IntersectionObserver(
       (entries) => {
         const hit = entries.find((e) => e.isIntersecting);
-        if (hit) setActive("#" + hit.target.id);
+        if (hit) setActive("/#" + hit.target.id);
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
     );
@@ -104,11 +107,23 @@ export default function SiteNav() {
               <span className="relative">{l.label}</span>
             </Link>
           ))}
+          <Link
+            href="/projects"
+            className={cn(
+              "relative rounded-pill px-4 py-2 text-sm transition-colors duration-300",
+              onProjects ? "text-ink" : "text-ink-soft hover:text-ink"
+            )}
+          >
+            {onProjects && (
+              <span className="absolute inset-0 rounded-pill bg-iris-tint" />
+            )}
+            <span className="relative">Our Projects</span>
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
           <Link
-            href="#contact"
+            href="/#contact"
             className="hidden items-center gap-1.5 rounded-pill bg-ink px-5 py-2.5 text-sm font-medium text-ground transition-colors duration-300 ease-expo hover:bg-iris sm:inline-flex"
           >
             Start a project
@@ -145,7 +160,17 @@ export default function SiteNav() {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/projects"
+              onClick={() => setOpen(false)}
+              className={cn(
+                "block rounded-[14px] px-4 py-3 text-sm transition-colors hover:bg-veil hover:text-ink",
+                onProjects ? "text-ink bg-veil" : "text-ink-soft"
+              )}
+            >
+              Our Projects
+            </Link>
+            <Link
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="mt-1 block rounded-[14px] bg-ink px-4 py-3 text-center text-sm font-medium text-ground"
             >
