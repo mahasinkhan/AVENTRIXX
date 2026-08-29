@@ -10,7 +10,6 @@ import { ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-<<<<<<< HEAD
 const featured = {
   name: "Financial services",
   copy: "Ledgers, reconciliation and reporting that survive audit and month-end.",
@@ -18,15 +17,6 @@ const featured = {
 };
 
 const stacked = [
-=======
-const sectors = [
-  {
-    name: "Financial services",
-    copy: "Ledgers, reconciliation and reporting that survive audit and month-end.",
-    src: "/img/sector-finance.jpg",
-    tall: true,
-  },
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
   {
     name: "Healthcare",
     copy: "Clinical tooling with traceability built into every answer.",
@@ -39,7 +29,6 @@ const sectors = [
   },
 ];
 
-<<<<<<< HEAD
 const more = [
   { label: "Public sector", headline: "Citizen services and case systems built to survive scrutiny." },
   { label: "Retail and commerce", headline: "Storefronts and inventory that hold up on peak days." },
@@ -47,8 +36,6 @@ const more = [
   { label: "Telecom and media", headline: "Billing, provisioning and streaming under real load." },
 ];
 
-=======
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
 export default function Sectors() {
   const root = useRef<HTMLElement>(null);
 
@@ -83,21 +70,13 @@ export default function Sectors() {
 
       gsap.set(".sec-card", { y: 34, opacity: 0 });
       ScrollTrigger.batch(".sec-card", {
-<<<<<<< HEAD
         start: "top 90%",
-=======
-        start: "top 88%",
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
         onEnter: (batch) =>
           gsap.to(batch, {
             y: 0,
             opacity: 1,
             duration: 0.95,
-<<<<<<< HEAD
             stagger: 0.09,
-=======
-            stagger: 0.1,
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
             ease: "expo.out",
             overwrite: true,
           }),
@@ -122,7 +101,6 @@ export default function Sectors() {
           </p>
         </div>
 
-<<<<<<< HEAD
         <div className="mt-14 grid gap-4 lg:grid-cols-[1.1fr_2.2fr_1.5fr] lg:items-stretch">
           {/* Featured — center */}
           <Link
@@ -209,52 +187,8 @@ export default function Sectors() {
               </Link>
             ))}
           </div>
-=======
-        <div className="mt-14 grid gap-4 lg:grid-cols-3">
-          {sectors.map((s) => (
-            <Link
-              href="#contact"
-              key={s.name}
-              className={
-                "sec-card group relative flex flex-col justify-end overflow-hidden rounded-card border border-line p-7 transition-[transform,box-shadow] duration-500 ease-expo hover:-translate-y-1.5 hover:shadow-lift " +
-                (s.tall ? "min-h-[30rem] lg:row-span-2" : "min-h-80")
-              }
-            >
-              <div className="img-tint img-grid absolute inset-0 overflow-hidden">
-                <Image
-                  src={s.src}
-                  alt=""
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="sec-media object-cover"
-                  priority={false}
-                />
-              </div>
-
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-2/3 bg-gradient-to-t from-ink/85 via-ink/45 to-transparent" />
-
-              <div className="relative z-[3]">
-                <h3 className="type-h3 text-ground">{s.name}</h3>
-                <p className="mt-2 max-w-xs text-sm leading-relaxed text-ground/75">
-                  {s.copy}
-                </p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-ground">
-                  Discuss a project
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-500 ease-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </div>
-            </Link>
-          ))}
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
         </div>
       </div>
     </section>
   );
-<<<<<<< HEAD
 }
-=======
-}
-
-
-
->>>>>>> 93973e12078eae33579f343645cef6763e3f806b
