@@ -60,7 +60,7 @@ export default function Hero() {
   );
 
   return (
-    <section ref={root} className="relative isolate pt-28">
+    <section ref={root} className="relative isolate pt-32">
       <div className="px-4 sm:px-6">
         <div className="hero-shot relative h-[calc(100vh-9rem)] min-h-[34rem] overflow-hidden rounded-[28px]">
           <Image
