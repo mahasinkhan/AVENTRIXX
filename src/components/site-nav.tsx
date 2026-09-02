@@ -12,6 +12,7 @@ import {
 } from "motion/react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { IndustriesMenu, IndustriesMenuMobile } from "@/components/nav/IndustriesMenu";
 
 const links = [
   { label: "Services", href: "/#services" },
@@ -83,6 +84,7 @@ export default function SiteNav() {
           className="hidden items-center gap-1 md:flex"
           onMouseLeave={() => setHovered(null)}
         >
+          <IndustriesMenu />
           {links.map((l) => (
             <Link
               key={l.href}
@@ -158,6 +160,7 @@ export default function SiteNav() {
                 {l.label}
               </Link>
             ))}
+            <IndustriesMenuMobile onNavigate={() => setOpen(false)} />
             <Link
               href="/projects"
               onClick={() => setOpen(false)}
