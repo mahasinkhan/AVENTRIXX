@@ -1,19 +1,28 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { industries, INDUSTRIES_HREF } from "../lib/industries";
 
-const columns = [
+const columns: { title: string; items: { label: string; href: string }[] }[] = [
   {
     title: "Services",
-    items: ["Product engineering", "Data platforms", "Applied AI", "Cloud and DevOps"],
+    items: ["Product engineering", "Data platforms", "Applied AI", "Cloud and DevOps"].map(
+      (label) => ({ label, href: "#" }),
+    ),
   },
   {
     title: "Industries",
-    items: ["Financial services", "Healthcare", "Retail", "Logistics"],
+    items: industries.map((i) => ({
+      label: i.name,
+      href: INDUSTRIES_HREF + "/" + i.slug,
+    })),
   },
   {
     title: "Company",
-    items: ["About", "Careers", "Insights", "Contact"],
+    items: ["About", "Careers", "Insights", "Contact"].map((label) => ({
+      label,
+      href: "#",
+    })),
   },
 ];
 
@@ -25,7 +34,7 @@ export default function SiteFooter() {
           <div>
             <div className="flex items-center">
               <Image
-                src="/img/Aventrix logo.png"
+                src="/img/aventrixx-logo.png"
                 alt="Aventrixx"
                 width={160}
                 height={40}
@@ -52,12 +61,12 @@ export default function SiteFooter() {
               </p>
               <ul className="mt-5 space-y-3">
                 {col.items.map((item) => (
-                  <li key={item}>
+                  <li key={item.label}>
                     <Link
-                      href="#"
+                      href={item.href}
                       className="text-sm text-ink-soft transition-colors duration-300 hover:text-iris"
                     >
-                      {item}
+                      {item.label}
                     </Link>
                   </li>
                 ))}
